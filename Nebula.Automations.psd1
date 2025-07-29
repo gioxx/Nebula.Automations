@@ -25,7 +25,7 @@
             Readme       = 'README.md'
             ReleaseNotes = @'
 - Minor fixes and improvements.
-- Module rename: Nebula.Automations (formerly Nebula.Tools). Previous GUID was invalided (d6f6c63d-e8db-4f0c-b7f6-4b0a95f7a63e).
+- Module rename: Nebula.Automations (formerly Nebula.Tools). Previous GUID was invalidated (d6f6c63d-e8db-4f0c-b7f6-4b0a95f7a63e).
 '@
         }
     }
