@@ -13,22 +13,6 @@
 
 ---
 
-## ✨ Included Functions
-
-- `Send-Mail`  
-  Send emails via SMTP with support for:
-  - Attachments
-  - CC / BCC
-  - Custom SMTP server and port
-
-- `CheckMGGraphConnection`  
-  Connect to Microsoft Graph using application credentials:
-  - Automatically handles module install
-  - Authenticates with client ID/secret
-  - Logs connection status
-
----
-
 ## 📦 Installation
 
 Install from PowerShell Gallery:
@@ -41,17 +25,7 @@ Install-Module -Name Nebula.Automations -Scope CurrentUser
 
 ## 🚀 Usage
 
-Example to send an email:
-
-```powershell
-Send-Mail -SMTPServer "smtp.example.com" -From "me@example.com" -To "you@example.com" -Subject "Hello" -Body "Test message"
-```
-
-Example to connect to Microsoft Graph:
-
-```powershell
-$Graph = CheckMGGraphConnection -tenantId "<tenant>" -clientId "<client>" -clientSecret "<secret>"
-```
+All documentation for using the module is available at **[kb.gioxx.org/docs/Nebula/Automations](https://kb.gioxx.org/docs/Nebula/Automations/intro)**.
 
 ---
 
