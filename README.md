@@ -25,7 +25,7 @@ Install-Module -Name Nebula.Automations -Scope CurrentUser
 
 ## 🚀 Usage
 
-All documentation for using the module is available at **[kb.gioxx.org/docs/Nebula/Automations](https://kb.gioxx.org/docs/Nebula/Automations/intro)**.
+All documentation for using the module is available at **[kb.gioxx.org/Nebula/Automations](https://kb.gioxx.org/Nebula/Automations/intro)**.
 
 ---
 
