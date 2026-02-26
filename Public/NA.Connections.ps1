@@ -6,7 +6,12 @@
     a client credentials flow and connects with Connect-MgGraph -AccessToken.
     Can optionally install Microsoft.Graph if missing.
 .EXAMPLE
-    Test-MgGraphConnection -TenantId $tenantId -ClientId $clientId -ClientSecret $clientSecret -LogLocation "C:\Logs\graph.log"
+    $connected = Test-MgGraphConnection -TenantId $tenantId -ClientId $clientId -ClientSecret $clientSecret
+    if (-not $connected) { throw "Unable to connect to Microsoft Graph." }
+.EXAMPLE
+    Test-MgGraphConnection -TenantId $tenantId -ClientId $clientId -ClientSecret $clientSecret -AutoInstall -LogLocation "C:\Logs\graph.log"
+.EXAMPLE
+    Test-MgGraphConnection -TenantId $tenantId -ClientId $clientId -ClientSecret $clientSecret -ShowInformations $true -LogLocation "C:\Logs\graph-debug.log"
 .PARAMETER TenantId
     Azure AD tenant ID (GUID or verified domain).
 .PARAMETER ClientId
@@ -19,6 +24,8 @@
     Install Microsoft.Graph automatically if missing.
 .PARAMETER ShowInformations
     When set, writes additional diagnostic info (never logs secrets).
+.LINK
+    https://kb.gioxx.org/Nebula/Automations/usage/test-mggraphconnection
 .NOTES
     Author: Giovanni Solone
 #>
@@ -135,5 +142,3 @@ function Test-MgGraphConnection {
     
     return $status.Success
 }
-
-Set-Alias -Name CheckMGGraphConnection -Value Test-MgGraphConnection -Description "Connect to Microsoft Graph (function)"
