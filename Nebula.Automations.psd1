@@ -1,6 +1,6 @@
 @{
     RootModule        = 'Nebula.Automations.psm1'
-    ModuleVersion     = '1.2.0'
+    ModuleVersion     = '1.2.1'
     GUID              = 'b94d3242-e96d-4078-ab12-c31a3f0221c2'
     Author            = 'Giovanni Solone'
     Description       = 'Common utilities for PowerShell scripting and automations: mail, Graph connectivity, scheduled tasks, and more.'
@@ -42,6 +42,7 @@
 - Improve: Internal helpers refined in Private scope (logging/security split).
 - Improve: Module aliases are now centralized in Nebula.Automations.psm1 for consistency.
 - Improve: Public scripts reorganized by domain (Connections, Messaging, ScheduledTasks).
+- Improve: Weekly scheduling support added to Register-ScriptScheduledTask and Invoke-ScriptTaskLifecycle.
 - New: Import-PreferredModule helper to prefer DEV module manifests with fallback to installed modules.
 - New: Initialize-ScriptRuntime to centralize module import, config loading and log directory bootstrap.
 - New: Invoke-ScriptTaskLifecycle function to delegate register/unregister flow with optional credential prompt and HH:mm parsing.
@@ -54,3 +55,5 @@
         }
     }
 }
+
+

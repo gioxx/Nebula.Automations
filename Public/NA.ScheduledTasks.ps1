@@ -45,7 +45,9 @@ function Register-ScriptScheduledTask {
     .PARAMETER StartTime
         Start time for the trigger in Standard mode. Default: now + 5 minutes.
     .PARAMETER ScheduleType
-        Trigger type for Standard mode: Daily or Once.
+        Trigger type for Standard mode: Daily, Once, or Weekly.
+    .PARAMETER WeeklyDays
+        Days of week used when ScheduleType is Weekly.
     .PARAMETER RepetitionIntervalMinutes
         Optional repetition interval (minutes) for Standard mode.
     .PARAMETER RepetitionDurationHours
@@ -93,8 +95,11 @@ function Register-ScriptScheduledTask {
 
         [datetime]$StartTime = (Get-Date).AddMinutes(5),
 
-        [ValidateSet('Daily', 'Once')]
+        [ValidateSet('Daily', 'Once', 'Weekly')]
         [string]$ScheduleType = 'Daily',
+
+        [ValidateSet('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')]
+        [string[]]$WeeklyDays = @('Friday'),
 
         [ValidateRange(0, 1440)]
         [int]$RepetitionIntervalMinutes = 0,
@@ -186,6 +191,8 @@ function Register-ScriptScheduledTask {
             $action = New-ScheduledTaskAction -Execute $PwshPath -Argument ($psArgs -join ' ')
             if ($ScheduleType -eq 'Daily') {
                 $trigger = New-ScheduledTaskTrigger -Daily -At $StartTime
+            } elseif ($ScheduleType -eq 'Weekly') {
+                $trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek $WeeklyDays -At $StartTime
             } else {
                 $trigger = New-ScheduledTaskTrigger -Once -At $StartTime
             }
@@ -345,9 +352,11 @@ function Invoke-ScriptTaskLifecycle {
     .PARAMETER ScriptPath
         Script path to execute when registering.
     .PARAMETER TaskTime
-        Daily task time in HH:mm format.
+        Task trigger time in HH:mm format.
     .PARAMETER ScheduleType
-        Daily or Once scheduling mode.
+        Daily, Once, or Weekly scheduling mode.
+    .PARAMETER WeeklyDays
+        Days of week used when ScheduleType is Weekly.
     .PARAMETER Description
         Optional task description.
     .PARAMETER PwshPath
@@ -396,8 +405,11 @@ function Invoke-ScriptTaskLifecycle {
 
         [string]$TaskTime = '02:00',
 
-        [ValidateSet('Daily', 'Once')]
+        [ValidateSet('Daily', 'Once', 'Weekly')]
         [string]$ScheduleType = 'Daily',
+
+        [ValidateSet('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')]
+        [string[]]$WeeklyDays = @('Friday'),
 
         [string]$Description,
         [string]$PwshPath,
@@ -478,6 +490,7 @@ function Invoke-ScriptTaskLifecycle {
         ExecutionPolicy = $ExecutionPolicy
         StartTime       = $startTime
         ScheduleType    = $ScheduleType
+        WeeklyDays      = $WeeklyDays
         LogLocation     = $LogLocation
     }
 
