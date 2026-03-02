@@ -42,6 +42,7 @@
 - Improve: Internal helpers refined in Private scope (logging/security split).
 - Improve: Module aliases are now centralized in Nebula.Automations.psm1 for consistency.
 - Improve: Public scripts reorganized by domain (Connections, Messaging, ScheduledTasks).
+- Improve: Weekly scheduling support added to Register-ScriptScheduledTask and Invoke-ScriptTaskLifecycle.
 - New: Import-PreferredModule helper to prefer DEV module manifests with fallback to installed modules.
 - New: Initialize-ScriptRuntime to centralize module import, config loading and log directory bootstrap.
 - New: Invoke-ScriptTaskLifecycle function to delegate register/unregister flow with optional credential prompt and HH:mm parsing.
@@ -50,7 +51,6 @@
 - New: Send-ReportIfChanged helper to centralize conditional report dispatch when changes are detected.
 - New: Start-ScriptTranscript and Stop-ScriptTranscriptSafe helpers for reusable transcript lifecycle handling.
 - New: Test-ScriptActivityLog helper to centralize activity-log readiness checks.
-- Improve: Weekly scheduling support added to Register-ScriptScheduledTask and Invoke-ScriptTaskLifecycle.
 '@
         }
     }
