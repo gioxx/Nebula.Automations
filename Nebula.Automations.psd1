@@ -1,6 +1,6 @@
 @{
     RootModule        = 'Nebula.Automations.psm1'
-    ModuleVersion     = '1.2.0'
+    ModuleVersion     = '1.2.1'
     GUID              = 'b94d3242-e96d-4078-ab12-c31a3f0221c2'
     Author            = 'Giovanni Solone'
     Description       = 'Common utilities for PowerShell scripting and automations: mail, Graph connectivity, scheduled tasks, and more.'
@@ -50,7 +50,10 @@
 - New: Send-ReportIfChanged helper to centralize conditional report dispatch when changes are detected.
 - New: Start-ScriptTranscript and Stop-ScriptTranscriptSafe helpers for reusable transcript lifecycle handling.
 - New: Test-ScriptActivityLog helper to centralize activity-log readiness checks.
+- Improve: Weekly scheduling support added to Register-ScriptScheduledTask and Invoke-ScriptTaskLifecycle.
 '@
         }
     }
 }
+
+
