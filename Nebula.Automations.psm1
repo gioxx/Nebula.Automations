@@ -30,6 +30,27 @@ if (Test-Path $publicDir) {
 # Fallback for Write-Log (if Nebula.Log is not installed on the system)
 if (-not (Get-Command -Name Write-Log -ErrorAction SilentlyContinue)) {
     function Write-Log {
+        <#
+        .SYNOPSIS
+            Compatibility logging function exposed when Nebula.Log is not installed.
+        .DESCRIPTION
+            Provides a Write-Log-compatible surface and delegates logging to Write-NALog.
+            Useful for scripts that already call Write-Log/Log-Message.
+        .PARAMETER Message
+            Log message text.
+        .PARAMETER Level
+            Log severity: INFO, SUCCESS, WARNING, DEBUG, ERROR.
+        .PARAMETER LogLocation
+            Optional path to a log file.
+        .PARAMETER WriteToFile
+            Compatibility switch kept for signature parity; ignored in fallback mode.
+        .EXAMPLE
+            Write-Log -Message 'Hello from Nebula.Automations' -Level INFO
+        .EXAMPLE
+            Write-Log -Message 'Task completed' -Level SUCCESS -LogLocation 'C:\Logs\MyScript'
+        .LINK
+            https://kb.gioxx.org/Nebula/Automations/usage/write-log
+        #>
         [CmdletBinding()]
         param(
             [string]$Message,
@@ -41,5 +62,16 @@ if (-not (Get-Command -Name Write-Log -ErrorAction SilentlyContinue)) {
         # delegate to Write-NALog; ignore WriteToFile if Nebula.Log is missing
         Write-NALog -Message $Message -Level $Level -LogLocation $LogLocation
     }
-    Set-Alias -Name Log-Message -Value Write-Log -ErrorAction SilentlyContinue
 }
+
+# --- Aliases & Exports -------------------------------------------------------
+$existingLogAlias = Get-Alias -Name 'Log-Message' -ErrorAction SilentlyContinue
+if (-not $existingLogAlias -or $existingLogAlias.ResolvedCommandName -ne 'Write-Log') {
+    Set-Alias -Name Log-Message -Value Write-Log -Force
+}
+
+$existingGraphAlias = Get-Alias -Name 'CheckMGGraphConnection' -ErrorAction SilentlyContinue
+if (-not $existingGraphAlias -or $existingGraphAlias.ResolvedCommandName -ne 'Test-MgGraphConnection') {
+    Set-Alias -Name CheckMGGraphConnection -Value Test-MgGraphConnection -Force
+}
+
